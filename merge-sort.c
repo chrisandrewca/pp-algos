@@ -32,39 +32,20 @@ void do_merge_sort(size_t starti, size_t row_size, int row[]) {
 
 		size_t middlei = (starti + row_size) / 2;
 
+		printf("%zu\n", middlei);
 		do_merge_sort(starti, middlei, row);
+
+		//printf("left %zu\n", middlei);
 
 		do_merge_sort(middlei + 1, row_size, row);
 
+		//printf("right %zu\n", middlei + 1);
+
 		merge(starti, middlei, row_size, row);
+	} else {
+		printf("pop - starti: %zu - %zu - row size: %zu\n", starti, (starti + row_size) / 2, row_size);
 	}
 }
 
 void merge(size_t starti, size_t middlei, size_t row_size, int row[]) {
-
-	printf("starti: %zu, middlei: %zu, row_size: %zu\n", starti, middlei, row_size);
-
-	size_t lefti = middlei - starti + 1;
-	size_t righti = row_size - middlei;
-
-	printf("left\n");
-	for (size_t n = starti; n < row_size; n++) {
-
-		if (lefti < middlei) {
-			printf("%zu ", lefti);
-			lefti++;
-		}
-	}
-
-	printf("\nright\n");
-
-	for (size_t n = starti; n < row_size; n++) {
-
-		if (righti < row_size) {
-			printf("%zu ", righti);
-			righti++;
-		}
-	}
-
-	printf("\n\n");
 }
