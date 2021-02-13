@@ -22,6 +22,45 @@ void merge_sort(size_t row_size, int row[]) {
 	}
 
 	printf("\n");
+
+	printf("shuffle\n\n");
+
+	int some_integers[5] = {1, 2, 3, 4, 5};
+	size_t select = 0;
+	for (size_t i = 0; i < 5; i++) {
+		int store = some_integers[i];
+		some_integers[i] = some_integers[select];
+		some_integers[select] = store;
+		select++;
+	}
+
+	for (size_t i = 0; i < 5; i++) {
+		printf(" %d ", some_integers[i]);
+	}
+	printf("\n\n");
+
+	some_integers[0] = 1;
+	some_integers[1] = 2;
+	some_integers[2] = 3;
+	some_integers[3] = 4;
+	some_integers[4] = 5;
+
+	select = 3;
+	for (size_t i = 0; i < 5; i++) {
+
+		int store = some_integers[i];
+		some_integers[i] = some_integers[select];
+		some_integers[select] = store;
+		select++;
+
+		if (select >= 4) {
+			select = 0;
+		}
+	}
+
+	for (size_t i = 0; i < 5; i++) {
+		printf(" %d ", some_integers[i]);
+	}
 }
 
 // recursive calls are a LIFO stack
@@ -65,7 +104,7 @@ void merge(size_t starti, size_t middlei, size_t row_size, int row[]) {
 	*/
 	// it seems considered elements < # of copies = free elements being copied - perf/hooks?
 	// in algo's book - once L || R at limit + 1 -> infinity -> ith || jth not increased again / fallthrough
-/ 
+
 	// int *copy = malloc(row_size * sizeof(int));
 
 	// Q: Do we need to limit the number of additional permutations to 0?
