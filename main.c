@@ -104,7 +104,9 @@ int main(int argc, char *argv[]) {
 	}
 
 	if (strcmp("merge-sort", argv[1]) == 0) {
-		int row[13] = {2, 3, 1, 8, 6, 12, 21, 14, 98, 34, 100, 2003, 449};
+		// int row[13] = {2, 3, 1, 8, 6, 12, 21, 14, 98, 34, 100, 2003, 449};
+		// int row[13] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+		int row[13] = {13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
 		printf("def row: %p, sizeof: %zd, dsizeof: %zd\n\n", row, sizeof(row), sizeof(row[0]));
 		merge_sort(13, row);
 	}

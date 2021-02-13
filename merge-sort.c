@@ -32,6 +32,8 @@ void do_merge_sort(size_t starti, size_t row_size, int row[]) {
 
 		size_t middlei = (starti + row_size) / 2;
 
+		// printf("%zu, %zu, %zu\n", starti, middlei, row_size);
+
 		do_merge_sort(starti, middlei, row);
 
 		do_merge_sort(middlei + 1, row_size, row);
@@ -41,7 +43,94 @@ void do_merge_sort(size_t starti, size_t row_size, int row[]) {
 }
 
 void merge(size_t starti, size_t middlei, size_t row_size, int row[]) {
-	printf("%zu\t%zu\t%zu\n", starti, middlei, row_size);
 
-	printf("%zu\t%zu\t%zu\n\n", middlei - starti + 1, row_size - middlei, row_size - starti);
+	// we've seen that i <= j
+	size_t i = starti;
+	size_t j = middlei;
+	printf("ith: %zu, jth: %zu\n", i, j);
+
+	// we've seen ilimit and rlimit are not always
+
+	//size_t ilimit = middlei - starti + 1;
+	//size_t rlimit = row_size - middlei;
+
+	// size_t ilimit = middlei;
+	// size_t rlimit = row_size - middlei;
+	// printf("ilimit: %zu, rlimit: %zu, rs: %zu\n", ilimit, rlimit, row_size);
+
+	// we've seen rs = jth + rlimit.. but in terms of # of copies...
+	/*
+		ith: 2, jth: 2
+		ilimit: 1, rlimit: 1, rs: 3
+	*/
+	// it seems considered elements < # of copies = free elements being copied - perf/hooks?
+	// in algo's book - once L || R at limit + 1 -> infinity -> ith || jth not increased again / fallthrough
+/ 
+	// int *copy = malloc(row_size * sizeof(int));
+
+	// Q: Do we need to limit the number of additional permutations to 0?
+		// aka - does this recursive algorithm rely on guarantee of permutations of length N to be interpreted
+			// in sorted order by some N steps of work?
+
+	// "do left"
+	// "do right"
+	// "do remainder" <-
+
+	int range[100];
+
+	// when i/j cant move its infinity so that 8/8 > i/j
+	for (size_t n = starti; n < row_size; n++) { // cannot limit j here to row_size in case i still accessing elements
+
+		// int storage = row[n];
+
+		// it seems i <= j
+		if (i > j) {
+			printf("i > j, %zu, %zu\n", i, j);
+		}
+
+		// it seems i < middlei || row_size
+		if (i > middlei || i > row_size) {
+			printf("i > middlei || row_size, %zu, %zu, %zu\n", i, middlei, row_size);
+		}
+
+		// it seems j > row_size
+		if (j > row_size) {
+			// printf("j > row_size, %zu, %zu\n", j, row_size);
+		}
+
+		if (row[i] < row[j]) {
+			row[n] = row[i];
+			range[n] = row[i];
+			i++;
+		} else {
+			row[n] = row[j];
+			range[n] = row[j];
+			j++;
+		}
+	}
+
+	for (size_t n = 0; n < row_size; n++) {
+		printf(" %d ", range[n]);
+	}
+
+	for (size_t n = 0; n < row_size; n++) {
+		range[n] = -2;
+	}
+
+	printf("\n\n");
+
+	// for (size_t n = starti; n < row_size; n++) {
+	// 	if (row[i] <= row[j]) {
+	// 		row[n] = row[i++];
+	// 	} else {
+	// 		row[n] = row[j++];
+	// 	}
+	// }
+
+	// for (size_t i = 0; i < row_size; i++) {
+	// 	printf("%d ", copy[i]);
+	// }
+
+	// printf("\n");
+	// free(copy);
 }
