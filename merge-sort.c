@@ -116,7 +116,11 @@ void merge(size_t starti, size_t middlei, size_t row_size, int row[]) {
 	// "do remainder" <-
 
 	int range[100];
+	for (size_t n = 0; n < 100; n++) {
+		range[n] = -14;
+	}
 
+	int nth_value = 0;
 	// when i/j cant move its infinity so that 8/8 > i/j
 	for (size_t n = starti; n < row_size; n++) { // cannot limit j here to row_size in case i still accessing elements
 
@@ -138,12 +142,30 @@ void merge(size_t starti, size_t middlei, size_t row_size, int row[]) {
 		}
 
 		if (row[i] < row[j]) {
+			nth_value = row[n];
 			row[n] = row[i];
+			row[i] = nth_value; // stale?
+
+			if (row[i] > row[i + 1]) {
+				row[i] = row[i + 1];
+				row[i + 1] = nth_value;
+			}
+
 			range[n] = row[i];
+
 			i++;
 		} else {
+			nth_value = row[n];
 			row[n] = row[j];
+			row[j] = nth_value; // stale?
+
+			if (row[j] > row[j + 1]) {
+				row[j] = row[j + 1];
+				row[j + 1] = nth_value;
+			}
+
 			range[n] = row[j];
+
 			j++;
 		}
 	}
@@ -152,11 +174,12 @@ void merge(size_t starti, size_t middlei, size_t row_size, int row[]) {
 		printf(" %d ", range[n]);
 	}
 
-	for (size_t n = 0; n < row_size; n++) {
-		range[n] = -2;
+	for (size_t n = 0; n < 100; n++) {
+		range[n] = -14;
 	}
 
 	printf("\n\n");
+	
 
 	// for (size_t n = starti; n < row_size; n++) {
 	// 	if (row[i] <= row[j]) {
