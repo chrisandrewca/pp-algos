@@ -29,5 +29,5 @@ cd ..
 
 REM .\bin\pp.exe aan bbb ccc
 .\bin\pp.exe merge-sort
-echo:
-echo %errorlevel%
+REM echo:
+REM echo %errorlevel%
