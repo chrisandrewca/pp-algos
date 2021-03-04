@@ -37,6 +37,8 @@ void do_merge_sort(size_t p, size_t r, int row[]) {
 	}
 }
 
+// recursive calls are a LIFO stack
+// think about applicability for search algorithms on graphs
 void merge(size_t p, size_t q, size_t r, int row[]) {
 
 	size_t n1 = q - p + 1;
@@ -77,68 +79,3 @@ void merge(size_t p, size_t q, size_t r, int row[]) {
 		row[k] = scratch[i];
 	}
 }
-
-// recursive calls are a LIFO stack
-// think about applicability for search algorithms on graphs
-
-// programviz.com
-// void do_merge_sort(int p, int r, int row[]);
-// void merge(int p, int q, int r, int row[]);
-// void do_merge_sort(int p, int r, int row[]) {
-
-// 	if (p < r) {
-
-// 		int q = p + (r - p) / 2;
-
-// 		do_merge_sort(p, q, row);
-
-// 		do_merge_sort(q + 1, r, row);
-
-// 		merge(p, q, r, row);
-// 	}
-// }
-
-// void merge(int p, int q, int r, int row[]) {
-
-// 	int n1 = q - p + 1;
-// 	int n2 = r - q;
-
-// 	int *L = malloc(n1 * sizeof(int));
-// 	int *R = malloc(n2 * sizeof(int));
-
-// 	for (int i = 0; i < n1; i++) {
-// 		L[i] = row[p + i];
-// 	}
-
-// 	for (int j = 0; j < n2; j++) {
-// 		R[j] = row[q + 1 + j];
-// 	}
-
-// 	int i = 0, j = 0;
-// 	int k = p;
-// 	while (i < n1 && j <n2) {
-// 		if (L[i] <= R[j]) {
-// 			row[k] = L[i];
-// 			i++;
-// 		} else {
-// 			row[k] = R[j];
-// 			j++;
-// 		}
-// 		k++;
-// 	}
-
-// 	while (i < n1) {
-// 		row[k] = L[i];
-// 		i++;
-// 		k++;
-// 	}
-
-// 	while (j < n2) {
-// 		row[k] = R[j];
-// 		j++;
-// 		k++;
-// 	}
-
-// 	free(L);
-// 	free(R);
-// }
